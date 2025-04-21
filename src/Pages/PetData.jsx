@@ -1,14 +1,14 @@
 import React from "react";
-import Product from "../Components/Data/DataPet";
+import DataPet from "../Components/Data/DataPet";
 import Nav from "../Components/Navbar/Nav";
 
-function ProductPage() {
+function PetData() {
   return (
     <div>
       <Nav />
-      <Product />
+      <DataPet />
     </div>
   );
 }
 
-export default ProductPage;
+export default PetData;

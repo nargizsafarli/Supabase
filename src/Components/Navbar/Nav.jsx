@@ -5,7 +5,7 @@ function Nav() {
   return (
     <div className='nav-container'>
         <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>User</NavLink>
-        <NavLink to="/product" className={({ isActive }) => isActive ? "active-link" : ""}>product</NavLink>
+        <NavLink to="/data" className={({ isActive }) => isActive ? "active-link" : ""}>data</NavLink>
     </div>
   )
 }
