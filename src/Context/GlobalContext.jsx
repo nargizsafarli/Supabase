@@ -1,13 +1,17 @@
 import { createContext, useEffect, useState } from "react";
 import { supabase } from "../client";
+import { useNavigate } from "react-router-dom";
+
 
 export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
-  console.log(users, "users");
+  const [user, setUser] = useState(null);
   const [page, setPage] = useState(1);
   const limit = 6;
+ 
+
 
   const fetchProducts = async (page) => {
     const from = (page - 1) * limit;
@@ -77,9 +81,62 @@ export const GlobalProvider = ({ children }) => {
   }, []);
 
 //   ! ---------------------------------Auth-----------------------------------
+const register = async ({ name, surname, phone, email, password }) => {
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { name, surname, phone },
+      },
+    });
+
+    if (error) {
+      return { error: error.message };
+    }
+   
+    return { data };
+  } catch (err) {
+    return { error: err.message };
+  }
+};
 
 
+// GlobalContext.jsx
 
+const login = async ({ email, password }) => {
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      return { error: error.message};
+    }
+    setUser(data.user);
+    return { data };
+  } catch (err) {
+    return { error: "Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin." };
+  }
+};
+
+const logout = async () => {
+  await supabase.auth.signOut();
+  setUser(null);
+};
+ 
+const checkSession = async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+  setUser(session?.user || null);
+};
+
+useEffect(() => {
+  checkSession();
+  supabase.auth.onAuthStateChange((_event, session) => {
+    setUser(session?.user || null);
+  });
+}, []);
 
 
   return (
@@ -92,6 +149,10 @@ export const GlobalProvider = ({ children }) => {
         createUser,
         deleteUser,
         updateUser,
+        register,
+        login,
+        logout,
+        user
       }}
     >
       {children}

@@ -6,6 +6,7 @@ import Register from './Components/Register/Register'
 import Login from './Components/Login/Login'
 import Dasboard from './Components/Dashboard/Dasboard'
 import FormPage from './Pages/FormPage'
+import PrivateRoute from './Components/Private/PrivateRoute'
 
 function App() {
   return (
@@ -15,7 +16,11 @@ function App() {
       <Route path='data' element={<PetData/>}/>
       <Route path='register' element={<FormPage/>}/>
       <Route path='login' element={<Login/>}/>
-      <Route path='dashboard' element={<Dasboard/>}/>
+      <Route path='dashboard' element={
+        <PrivateRoute>
+          <Dasboard/>
+        </PrivateRoute>
+      }/>
     </Routes>
    </BrowserRouter>
   )
