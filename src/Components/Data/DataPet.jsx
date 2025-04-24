@@ -1,6 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../Context/GlobalContext';
 import pet from "./pet.module.css"
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 
 function DataPet() {
   const { products, setPage } = useContext(GlobalContext);
@@ -9,12 +11,20 @@ function DataPet() {
     setPage(pageNum);
     setCurrentPage(pageNum);
   }
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+    });
+  }, []);
   console.log(products);
   return (
     <div className={pet.container}>
       <div className={pet["container-item"]}>
         {products.map((product) => (
-          <div key={product.id} className={pet.card}>
+          <div key={product.id} className={pet.card} data-aos="zoom-in">
             <img src={product.productImg} className={pet.img} />
             <h2 className="text-lg font-semibold">{product.productName}</h2>
             <p>{product.productTitle}</p>
