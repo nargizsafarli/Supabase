@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../Context/GlobalContext";
+import userd from "./user.module.css"
 
 function UserCrud() {
   const { users, createUser, deleteUser, updateUser } =
@@ -46,10 +47,10 @@ function UserCrud() {
   };
 
   return (
-    <div>
+    <div className={userd.container}>
       <h2>User List</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={userd.form}>
         <input
           type="text"
           placeholder="Name"
@@ -71,15 +72,16 @@ function UserCrud() {
           name="age"
           onChange={handleChange}
         />
-        <button type="submit">{editMode ? "save" : "Create"}</button>
+        <button className={userd.createBtn} type="submit">{editMode ? "save" : "Create"}</button>
       </form>
 
-      <table border="1" cellPadding="10" cellSpacing="0">
+      <table  cellPadding="10" cellSpacing="0" className={userd.table}>
         <thead>
           <tr>
             <th>Name</th>
             <th>Surname</th>
             <th>Age</th>
+            <th>Crud</th>
           </tr>
         </thead>
         <tbody>
@@ -90,13 +92,13 @@ function UserCrud() {
               <td>{userItem.age}</td>
               <td>
                 {editId === userItem.id ? (
-                  <span>Editing...</span>
+                  <span className={userd.editingTxt}>Editing...</span>
                 ) : (
                   <>
-                    <button onClick={() => handleDelete(userItem.id)}>
+                    <button className={userd.deleteBtn} onClick={() => handleDelete(userItem.id)}>
                       Delete
                     </button>
-                    <button onClick={() => handleEdit(userItem)}>Edit</button>
+                    <button className={userd.editBtn} onClick={() => handleEdit(userItem)}>Edit</button>
                   </>
                 )}
               </td>

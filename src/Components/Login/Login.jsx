@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { GlobalContext } from '../../Context/GlobalContext'
+import log from "./Login.module.css"
 
 function Login() {
     const navigate=useNavigate()
@@ -30,11 +31,12 @@ function Login() {
   return (
 
 
-    <div className="login-container">
-      <form className="auth-form" onSubmit={handleSubmit}>
-        {formError && <p className="error-message">{formError}</p>}
+    <div className={log.container}>
+    <h1>Login form</h1>
+      <form className={log.auth} onSubmit={handleSubmit}>
+        {formError && <p className={log.error}>{formError}</p>}
 
-        <div className="form-group">
+        <div className={log.form}>
           <label htmlFor="email">E-poçt</label>
           <input
             type="email"
@@ -45,7 +47,7 @@ function Login() {
           />
         </div>
 
-        <div className="form-group">
+        <div className={log.form}>
           <label htmlFor="password">Şifrə</label>
           <input
             type="password"
@@ -56,8 +58,8 @@ function Login() {
           />
         </div>
 
-        <button type="submit" className="auth-button">Login</button>
-        <p className="auth-redirect">
+        <button type="submit" className={log.button}>Login</button>
+        <p className={log.redirect}>
              Hesabınız yoxdur? <Link to="/register">Register</Link>
           </p>
       </form>

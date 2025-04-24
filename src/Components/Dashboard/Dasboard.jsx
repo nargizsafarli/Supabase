@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../../Context/GlobalContext'
 import { useNavigate } from 'react-router-dom'
+import dash from "./Dashboard.module.css"
 
 function Dasboard() {
     const{user,logout}=useContext(GlobalContext)
@@ -11,8 +12,8 @@ function Dasboard() {
       navigate("/login")
     }
   return (
-    <div>
-         <h1>Salam, {user?.user_metadata.name}</h1>
+    <div className={dash.container}>
+         <h1>Welcome Our Dashboard {user?.user_metadata.name} !</h1>
          <button onClick={handleLogout}>Çıxış</button>
     </div>
   )

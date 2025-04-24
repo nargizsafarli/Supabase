@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../Context/GlobalContext";
+import reg from "./Register.module.css"
 
 function Register() {
   const [name, setName] = useState("");
@@ -11,6 +12,7 @@ function Register() {
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
   const {register}=useContext(GlobalContext)
+  const [generalError, setGeneralError] = useState("");
 
   const validateForm = () => {
     let errors = {};
@@ -29,10 +31,11 @@ function Register() {
    
   const handleSubmit=async(e)=>{
     e.preventDefault();
+    setGeneralError("");
     if (!validateForm()) return;
     const { data, error } = await register({ name, surname, phone, email, password });
     if (error) {
-        setError(error);
+      setGeneralError(error);
       } else {
         alert("Qeydiyyat uğurla başa çatdı.");
         navigate("/login");
@@ -41,12 +44,14 @@ function Register() {
   }
 
   return (
-    <div>
-      <div className="form-container">
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="form-group">
+    <div className={reg.container}>
+     <h1>Register form</h1>
+      <div className={reg.con}>
+        <form className={reg.auth} onSubmit={handleSubmit}>
+        {generalError && <p className={reg.important}>{generalError}</p>}
+          <div className={reg.form}>
             <label htmlFor="name">
-              Ad <span className="important">*</span>
+              Ad <span className={reg.important}>*</span>
             </label>
             <input
               type="text"
@@ -56,12 +61,12 @@ function Register() {
               onChange={(e) => setName(e.target.value)}
             />
             {formErrors.name && (
-              <p className="error-message">{formErrors.name}</p>
+              <p className={reg.important}>{formErrors.name}</p>
             )}
           </div>
-          <div className="form-group">
+          <div className={reg.form}>
             <label htmlFor="surname">
-              Soyad <span className="important">*</span>
+              Soyad <span className={reg.important}>*</span>
             </label>
             <input
               type="text"
@@ -71,12 +76,12 @@ function Register() {
               onChange={(e) => setSurname(e.target.value)}
             />
             {formErrors.surname && (
-              <p className="error-message">{formErrors.surname}</p>
+              <p className={reg.important}>{formErrors.surname}</p>
             )}
           </div>
-          <div className="form-group">
+          <div className={reg.form}>
             <label htmlFor="phone">
-              Mobil nömrə <span className="important">*</span>
+              Mobil nömrə <span className={reg.important}>*</span>
             </label>
             <input
               type="text"
@@ -86,13 +91,13 @@ function Register() {
               onChange={(e) => setPhone(e.target.value)}
             />
             {formErrors.phone && (
-              <p className="error-message">{formErrors.phone}</p>
+              <p className={reg.important}>{formErrors.phone}</p>
             )}
           </div>
 
-          <div className="form-group">
+          <div className={reg.form}>
             <label htmlFor="email">
-              E-poçt <span className="important">*</span>
+              E-poçt <span className={reg.important}>*</span>
             </label>
             <input
               type="email"
@@ -102,12 +107,12 @@ function Register() {
               onChange={(e) => setEmail(e.target.value)}
             />
             {formErrors.email && (
-              <p className="error-message">{formErrors.email}</p>
+              <p className={reg.important}>{formErrors.email}</p>
             )}
           </div>
-          <div className="form-group">
+          <div className={reg.form}>
             <label htmlFor="password">
-              Şifrə <span className="important">*</span>
+              Şifrə <span className={reg.important}>*</span>
             </label>
             <input
               type="password"
@@ -117,15 +122,15 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
             {formErrors.password && (
-              <p className="error-message">{formErrors.password}</p>
+              <p className={reg.important}>{formErrors.password}</p>
             )}
           </div>
 
-          <button type="submit" className="auth-button">
+          <button type="submit" className={reg.button}>
             Register
           </button>
 
-          <p className="auth-redirect">
+          <p className={reg.red}>
             Artıq hesabınız var? <Link to="/login">Giriş</Link>
           </p>
         </form>
