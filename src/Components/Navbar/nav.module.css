@@ -1,34 +1,4 @@
-/* *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(66, 66, 66);
-    padding: 30px;
-    gap: 20px;
-    font-size: 23px;
-    font-family: sans-serif;
-}
-.link {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: all 0.3s ease-in;
-    
-    &:hover{
-        color: gray;
-    }
-  }
-  
-  .active {
-    color: rgb(190, 188, 188);
-    transition: all 0.3s ease-in-out; 
-  }
-   */
+
    * {
     margin: 0;
     padding: 0;
@@ -39,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #1f1f1f; /* daha tünd, modern görünüş */
+    background-color: #1f1f1f; 
     padding: 20px 40px;
     gap: 30px;
     font-size: 20px;
